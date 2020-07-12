@@ -3,9 +3,9 @@ import { View, StyleSheet, Dimensions, Text } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
 const FirstRoute = () => (
-  //   <View style={[styles.scene, { backgroundColor: 'red' }]}>
-  <Text>First Route</Text>
-  //   </View>
+  <>
+    <Text>First Route</Text>
+  </>
 );
 
 const SecondRoute = () => (
@@ -15,13 +15,21 @@ const SecondRoute = () => (
 
 const initialLayout = { width: Dimensions.get('window').width, height: 0 };
 
-const TabView = (props) => {
-  console.log('props', props);
+const TabViewContainer = (props) => {
+  const { data } = props;
+  console.log('data', data);
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: 'first', title: 'First' },
     { key: 'second', title: 'Second' },
   ]);
+  const dynamicRoutes =
+    data &&
+    data.map((item) => {
+      return { key: item.Name, title: item.Name };
+    });
+
+  console.log('dynamicRoutes', dynamicRoutes);
 
   const renderScene = SceneMap({
     first: FirstRoute,
@@ -38,7 +46,7 @@ const TabView = (props) => {
   );
 };
 
-export default TabView;
+export default TabViewContainer;
 
 const styles = StyleSheet.create({
   scene: {
