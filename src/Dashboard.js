@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import axios from 'axios';
-
+import TabView from './TabView';
+import ListingItems from './ListingItems';
 function Dashboard() {
   const [data, setdata] = useState([]);
   useEffect(() => {
@@ -23,9 +24,13 @@ function Dashboard() {
   }, []);
   console.log('data', data);
   return (
-    <View>
-      <Text>Dashboard</Text>
-    </View>
+    <>
+      <View style={styles.container}>
+        <Text> Esp tiles</Text>
+      </View>
+      <TabView data={data} />
+      {/* <ListingItems data={data} /> */}
+    </>
   );
 }
 
@@ -33,9 +38,7 @@ export default Dashboard;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
   },
 });
